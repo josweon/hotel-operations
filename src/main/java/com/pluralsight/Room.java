@@ -28,5 +28,4 @@ public class Room {
     public boolean isAvailable() {
         return !isDirty && !isOccupied;
     }
-
 }
