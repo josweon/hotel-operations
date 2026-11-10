@@ -59,4 +59,13 @@ public class Employee {
         this.endTime = time;
         this.hoursWorked += (this.endTime - this.startTime);
     }
+
+    public void punchTimeCard(int time) {
+        if (this.startTime > 0){
+            this.endTime = time;
+            hoursWorked += (this.endTime - this.startTime);
+        } else {
+            this.startTime = time;
+        }
+    }
 }
