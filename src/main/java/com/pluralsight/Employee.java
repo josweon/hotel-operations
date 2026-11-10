@@ -6,7 +6,8 @@ public class Employee {
     private String department;
     private double payRate;
     private double hoursWorked;
-    //employeeId, name, department, payRate, hoursWorked.
+    private int startTime;
+    private int endTime;
 
     public Employee(int employeeId, String name, String department, double payRate, double hoursWorked) {
         this.employeeId = employeeId;
@@ -48,5 +49,14 @@ public class Employee {
     public double getOvertimeHours() {
         double overtime = (this.hoursWorked > 40) ? this.hoursWorked - 40 : 0;
         return overtime;
+    }
+
+    public void punchIn(int time) {
+        this.startTime = time;
+    }
+
+    public void punchOut(int time) {
+        this.endTime = time;
+        this.hoursWorked += (this.endTime - this.startTime);
     }
 }
