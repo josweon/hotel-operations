@@ -11,5 +11,9 @@ public class Main {
 
         System.out.println(testRes.getReservationTotal());
 
+        Employee testEmployee = new Employee(12345, "Jensen", "Hardware", 120, 60);
+        System.out.println(testEmployee.getRegularHours());
+        System.out.println(testEmployee.getOvertimeHours());
+        System.out.println(testEmployee.getHoursWorked());
     }
 }
