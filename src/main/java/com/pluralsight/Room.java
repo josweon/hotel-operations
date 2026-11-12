@@ -22,7 +22,11 @@ public class Room {
     }
 
     public boolean isOccupied() {
-        return this.isOccupied();
+        return this.isOccupied;
+    }
+
+    public boolean isDirty () {
+        return isDirty;
     }
 
     public boolean isAvailable() {
@@ -30,8 +34,10 @@ public class Room {
     }
 
     public void checkIn() {
-        this.isOccupied = true;
-        this.isDirty = true;
+        if (isAvailable()) {
+            this.isOccupied = true;
+            this.isDirty = true;
+        }
     }
 
     public void cleanRoom() {
