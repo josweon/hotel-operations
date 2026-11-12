@@ -23,7 +23,21 @@ public class Hotel {
 
     public boolean bookRoom(int roomCount, boolean suite) {
         if (suite) {
-            if (roomCount < )
+            if (roomCount > this.numberOfSuites) {
+                System.out.printf("Only %d are available...%n", this.numberOfSuites);
+                return false;
+            } else {
+                this.numberOfSuites -= roomCount;
+                return true;
+            }
+        } else {
+            if (roomCount > this.numberOfRooms) {
+                System.out.printf("Only %d are available...%n", this.numberOfRooms);
+                return false;
+            } else {
+                this.numberOfRooms -= roomCount;
+                return true;
+            }
         }
     }
 }
