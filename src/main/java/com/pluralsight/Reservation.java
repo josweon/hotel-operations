@@ -1,7 +1,5 @@
 package com.pluralsight;
 
-import java.util.Locale;
-
 public class Reservation {
     private String roomType;
     private int numberOfNights;
@@ -57,19 +55,20 @@ public class Reservation {
     }
 
     public double getReservationTotal () {
-        double pricePerNight = this.getPrice();
+        double basePrice = this.getPrice();
+        double weekendPrice = basePrice * 1.1;
         double total = 0;
 
         if (isWeekend) {
             int nights = this.numberOfNights;
-            if (nights <= 2) {
-                total = (pricePerNight + (pricePerNight * 0.1)) * nights;
+            if (nights > 0 && nights <= 2) {
+                total = weekendPrice * nights;
             } else {
                 int weekdays = nights - 2;
-                total = ((pricePerNight + (pricePerNight * 0.1)) * 2) + (pricePerNight * weekdays);
+                total = (weekendPrice * 2) + (basePrice * weekdays);
             }
         } else {
-            total = pricePerNight * this.getNumberOfNights();
+            total = basePrice * this.numberOfNights;
         }
 
         return total;
