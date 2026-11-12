@@ -12,6 +12,7 @@ public class Employee {
     private int endTime;
     private int startMinutes;
     private int endMinutes;
+    private boolean isPunchedIn;
 
     public Employee(int employeeId, String name, String department, double payRate, double hoursWorked) {
         this.employeeId = employeeId;
@@ -45,7 +46,10 @@ public class Employee {
     }
 
     public double getTotalPay() {
-        return this.getRegularHours() + this.getOvertimeHours();
+        double regularPay = this.getHoursWorked() * this.getPayRate();
+        double overtimePay = this.getHoursWorked() * (this.getPayRate() * 1.5);
+
+        return regularPay + overtimePay;
     }
 
     public double getRegularHours() {
@@ -77,14 +81,25 @@ public class Employee {
         LocalDateTime now = LocalDateTime.now();
         this.endTime = now.getHour();
         this.endMinutes = now.getMinute();
+
+        int startTotalMinutes = this.startTime * 60 + this.startMinutes;
+        int endTotalMinutes = this.endTime * 60 + this.endMinutes;
+        double hours = (endTotalMinutes - startTotalMinutes) / 60;
+
+        this.hoursWorked += hours;
+
     }
 
     public void punchTimeCard(int time) {
-        if (this.startTime > 0){
+        if (isPunchedIn) {
             this.endTime = time;
-            hoursWorked += (this.endTime - this.startTime);
+            int totalTime = this.endTime - this.startTime;
+            hoursWorked += totalTime;
+            this.isPunchedIn = false;
+
         } else {
             this.startTime = time;
+            this.isPunchedIn = true;
         }
     }
 }
